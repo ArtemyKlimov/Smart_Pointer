@@ -17,8 +17,6 @@ class Foo{
 int main(int argc, char **argv){
 
 std::cout<<"Hi"<<std::endl;
-smartptr<Foo> f1(NULL);
-std::cout<<f1->sum()<<std::endl;
 
 return 0;
 }
