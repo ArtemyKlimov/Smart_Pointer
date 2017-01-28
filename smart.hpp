@@ -1,19 +1,26 @@
 #ifndef SMART_HPP
 #define SMART_HPP
 
-#include <iostream>
+template <typename T>
+class pointer{
+	T* value;
+	size_t ref_founter;
+
+};
 
 template <typename T>
-class smartptr{
+class Smart_Ptr{
 	private:
 		T* value;
-		size_t count;
+		size_t ref_counter;
 	public:
-		smartptr(T* _val);
-		~smartptr();
+		Smart_Ptr(T* _val);
+		~Smart_Ptr();
 		T& operator* () const;
-		T *operator->() const;
-		size_t get_count() const;
+		T *operator->();
+		size_t use_count() const;
+		Smart_ptr& operator =(const Smart_ptr &rhv);
+		T* get(); 
 };
 
 #include "smart.cpp"
