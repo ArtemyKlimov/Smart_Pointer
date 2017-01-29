@@ -22,8 +22,10 @@ void Smart_Ptr<T>::decrease(){
 	--(*ref_counter);
 	if((*ref_counter) <1){
 			delete ref_counter;	
-			if(pointer !=nullptr)
+			if(pointer !=nullptr){
 				delete pointer;
+				std::cout<<"pointer deleted"<<std::endl;
+			}
 	}
 }
 
@@ -34,10 +36,17 @@ Smart_Ptr<T>::~Smart_Ptr(){
 
 template<typename T>
 Smart_Ptr<T>& Smart_Ptr<T>::operator=(Smart_Ptr<T> const&rhv){
+	if(rhv.pointer != nullptr){
 		decrease();
 		this->pointer = rhv.pointer;
 		this->ref_counter = rhv.ref_counter;
 		increase();
+	}
+	else{
+		decrease();
+		pointer = nullptr;
+		ref_counter = new int(0);
+	}
 	return *this;
 }
 
@@ -57,6 +66,16 @@ T* Smart_Ptr<T>::operator ->(){
 
 
 template<typename T>
+void Smart_Ptr<T>::reset(){
+	if((*ref_counter) <1){
+		delete pointer;
+	}
+		--(*ref_counter);
+		pointer = nullptr;
+		ref_counter = new int(0);
+}
+
+template<typename T>
 int Smart_Ptr<T>::use_count() const{
 	return *ref_counter;
 }
@@ -69,12 +88,29 @@ T* Smart_Ptr<T>::get(){
 
 template<typename T>
 void Smart_Ptr<T>::increase(){
-	if(ref_counter != nullptr)
+	//if((*ref_counter) != 0)
 		++(*ref_counter);
 }
 
+template<typename T>
+bool Smart_Ptr<T>::operator==(const Smart_Ptr<T>& rhv) const{
+	return this->pointer == rhv.pointer;	
+}
+
+template<typename T>
+bool Smart_Ptr<T>::operator==(const T* rhv) const{
+	return this->pointer ==rhv;
+}
+
+template<typename T>
+bool Smart_Ptr<T>::operator!=(const Smart_Ptr<T>& rhv)const{
+	return !(this->pointer == rhv.pointer);
+}
+
+
+
+
+
 #endif
-
-
 
 
