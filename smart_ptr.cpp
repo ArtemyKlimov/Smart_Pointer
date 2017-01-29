@@ -24,7 +24,6 @@ void Smart_Ptr<T>::decrease(){
 			delete ref_counter;	
 			if(pointer !=nullptr){
 				delete pointer;
-				std::cout<<"pointer deleted"<<std::endl;
 			}
 	}
 }

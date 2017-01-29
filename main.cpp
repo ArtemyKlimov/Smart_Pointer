@@ -38,7 +38,7 @@ if(f1 == f4){
 }
 f1.reset();
 std::cout<<f3.use_count()<<std::endl;
-Smart_Ptr<Foo> f5 = f2;
+Smart_Ptr<Foo> f5(f2);
 Smart_Ptr<Foo> f6(new Foo(15,16));
 std::cout<<f6.use_count()<<std::endl;
 std::cout<<f5.use_count()<<std::endl;
@@ -46,6 +46,9 @@ std::cout<<f1.use_count()<<std::endl;
 f5 = f1;
 std::cout<<f5.use_count()<<std::endl;
 std::cout<<f3.use_count()<<std::endl;
+Foo* f7 = new Foo(31,17);
+f5 = make_shared(f7);
+std::cout<<f5.use_count()<<std::endl;
 
 return 0;
 }
